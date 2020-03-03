@@ -1,5 +1,5 @@
 #include <stm32h743xx.h>
-#include "../inc/stm32h743_gpio.h"
+#include "stm32h743_gpio.h"
 
 void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsigned char type, unsigned char speed, unsigned char pull, unsigned char alt_func)
 {
