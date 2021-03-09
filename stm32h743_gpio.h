@@ -1,5 +1,5 @@
-#ifndef _STM32F429_GPIO_H_
-#define _STM32F429_GPIO_H_
+#ifndef _STM32H743_GPIO_H_
+#define _STM32H743_GPIO_H_
 
 #define PORT_A 0
 #define PORT_B 1
