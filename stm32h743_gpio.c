@@ -1,3 +1,4 @@
+#include <stm32h7xx.h>
 #include <stm32h743xx.h>
 #include "stm32h743_gpio.h"
 
@@ -7,18 +8,11 @@ void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsig
 	
 	RCC->AHB4ENR   |= (0x1UL << port); // set
 	
-	base->MODER   &= ~(MODE_RESET << (pin * 2)); // clear
-	base->MODER   |= (unsigned long)mode << (pin * 2); // set
+	MODIFY_REG (base->MODER,    MODE_RESET << (pin * 2),  mode << (pin * 2));
+	MODIFY_REG (base->OTYPER,   TYPE_RESET << (pin * 1),  type << (pin * 1));
+	MODIFY_REG (base->OSPEEDR, SPEED_RESET << (pin * 2), speed << (pin * 2));
+	MODIFY_REG (base->PUPDR,    PULL_RESET << (pin * 2),  pull << (pin * 2));
 	
-	base->OTYPER  &= ~(TYPE_RESET << pin); // clear
-	base->OTYPER  |= (unsigned long)type << pin; // set
-	
-	base->OSPEEDR &= ~(SPEED_RESET << (pin * 2)); // clear
-	base->OSPEEDR |= (unsigned long)speed << (pin * 2); // set
-	
-	base->PUPDR   &= ~(PULL_RESET << (pin * 2)); // reset
-	base->PUPDR   |= (unsigned long)pull << (pin * 2); // set
-	
-	base->AFR[pin / 8] &= ~(0x0000000F << (pin * 4)); // reset
-	base->AFR[pin / 8] |= (unsigned long)alt_func << (pin * 4); // set
+	if (pin <= 7) MODIFY_REG (base->AFR[0], ALTF_RS << ((pin - 0) * 4),  alt_func << ((pin - 0) * 4));
+	else          MODIFY_REG (base->AFR[1], ALTF_RS << ((pin - 8) * 4),  alt_func << ((pin - 8) * 4));
 }
