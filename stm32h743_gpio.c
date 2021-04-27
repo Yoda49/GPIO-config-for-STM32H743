@@ -19,14 +19,6 @@ void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsig
 	base->PUPDR   &= ~(PULL_RESET << (pin * 2)); // reset
 	base->PUPDR   |= (unsigned long)pull << (pin * 2); // set
 	
-	if (pin <= 7)
-	{
-		base->AFR[0] &= ~(0x0000000F << (pin * 4)); // reset
-		base->AFR[0] |= (unsigned long)alt_func << (pin * 4); // set
-	}
-	else
-	{
-		base->AFR[1] &= ~(0x0000000F << ((pin - 8) * 4)); // reset
-		base->AFR[1] |= (unsigned long)alt_func << ((pin - 8) * 4);
-	}
+	base->AFR[pin / 8] &= ~(0x0000000F << (pin * 4)); // reset
+	base->AFR[pin / 8] |= (unsigned long)alt_func << (pin * 4); // set
 }
