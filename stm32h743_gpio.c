@@ -6,7 +6,7 @@ void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsig
 {
 	GPIO_TypeDef * base = (GPIO_TypeDef *)(D3_AHB1PERIPH_BASE + (port * 0x0400UL));
 	
-	RCC->AHB4ENR   |= (0x1UL << port); // set
+	RCC->AHB4ENR |= (0x1UL << port); // set
 	
 	MODIFY_REG (base->MODER,    MODE_RESET << (pin * 2),  mode << (pin * 2));
 	MODIFY_REG (base->OTYPER,   TYPE_RESET << (pin * 1),  type << (pin * 1));
