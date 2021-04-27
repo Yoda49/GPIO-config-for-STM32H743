@@ -31,7 +31,6 @@
 #define ALTF_15 0xFUL
 #define ALTF_RS 0xFUL
 
-
 #define MODE_INPUT  0x0UL
 #define MODE_OUTPUT 0x1UL
 #define MODE_ALT_F  0x2UL
@@ -42,13 +41,11 @@
 #define TYPE_OPEN_DRAIN 0x1UL
 #define TYPE_RESET      0x1UL
 
-
 #define SPEED_LOW   0x0UL
 #define SPEED_MED   0x1UL
 #define SPEED_HIGH  0x2UL
 #define SPEED_MAX   0x3UL
 #define SPEED_RESET 0x3UL
-
 
 #define PULL_NO    0x0UL
 #define PULL_UP    0x1UL
