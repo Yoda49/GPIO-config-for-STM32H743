@@ -52,5 +52,7 @@
 #define PULL_DOWN  0x2UL
 #define PULL_RESET 0x3UL
 
+extern unsigned char gpio_conflict_flag;
+
 void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsigned char type, unsigned char speed, unsigned char pull, unsigned char alt_func);
 #endif
