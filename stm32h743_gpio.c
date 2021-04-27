@@ -2,6 +2,9 @@
 #include <stm32h743xx.h>
 #include "stm32h743_gpio.h"
 
+unsigned short gpio_bank [11] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+unsigned char  gpio_conflict_flag = 0;
+
 void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsigned char type, unsigned char speed, unsigned char pull, unsigned char alt_func)
 {
 	GPIO_TypeDef * base = (GPIO_TypeDef *)(D3_AHB1PERIPH_BASE + (port * 0x0400UL));
@@ -15,4 +18,7 @@ void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsig
 	
 	if (pin <= 7) MODIFY_REG (base->AFR[0], ALTF_RS << ((pin - 0) * 4),  alt_func << ((pin - 0) * 4));
 	else          MODIFY_REG (base->AFR[1], ALTF_RS << ((pin - 8) * 4),  alt_func << ((pin - 8) * 4));
+	
+	// check for conflict	
+	if (gpio_bank[port] & (1UL << pin)) gpio_conflict = 1; else gpio_bank [port] |= 1UL << pin;
 }
