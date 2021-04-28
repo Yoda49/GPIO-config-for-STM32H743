@@ -5,7 +5,7 @@
 unsigned short gpio_bank [11] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 unsigned char  gpio_conflict_flag = 0;
 
-void gpio_init (unsigned char port, unsigned char pin, unsigned char mode, unsigned char type, unsigned char speed, unsigned char pull, unsigned char alt_func)
+void gpio_init (unsigned char port, unsigned char pin, unsigned long mode, unsigned long type, unsigned long speed, unsigned long pull, unsigned long alt_func)
 {
 	GPIO_TypeDef * base = (GPIO_TypeDef *)(D3_AHB1PERIPH_BASE + (port * 0x0400UL));
 	
