@@ -20,5 +20,5 @@ void gpio_init (unsigned char port, unsigned char pin, unsigned long mode, unsig
 	else          MODIFY_REG (base->AFR[1], ALTF_RS << ((pin - 8) * 4),  alt_func << ((pin - 8) * 4));
 	
 	// check for conflict	
-	if (gpio_bank[port] & (1UL << pin)) gpio_conflict = 1; else gpio_bank [port] |= 1UL << pin;
+	if (gpio_bank[port] & (1UL << pin)) gpio_conflict_flag = 1; else gpio_bank [port] |= 1UL << pin;
 }
